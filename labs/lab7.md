@@ -44,7 +44,9 @@ $ curl -O ftp://ftp.ensemblgenomes.org/pub/release-37/bacteria/species_EnsemblBa
 :::::::::::::::::::::::::::::::::::::::: questions
 
 - What data are we using?
+  Metadata 
 - Why is this experiment important?
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -72,7 +74,7 @@ We are going to use a long-term sequencing dataset from a population of *Escheri
 
 ### View the metadata
 
-We will be working with three sample events from the **Ara-3** strain of this experiment, one from 5,000 generations, one from 15,000 generations, and one from 50,000 generations. The population changed substantially during the course of the experiment, and we will be exploring how (the evolution of a **Cit+** mutant and **hypermutability**) with our variant calling workflow. The metadata file associated with this lesson can be [downloaded directly here](files/Ecoli_metadata_composite.csv) or [viewed in Github](https://github.com/datacarpentry/wrangling-genomics/blob/main/episodes/files/Ecoli_metadata_composite.csv). If you would like to know details of how the file was created, you can look at [some notes and sources here](https://github.com/datacarpentry/wrangling-genomics/blob/main/episodes/files/Ecoli_metadata_composite_README.md).
+We will be working with three sample events from the **Ara-3** strain of this experiment, one from 5,000 generations, one from 15,000 generations, and one from 50,000 generations. The population changed substantially during the course of the experiment, and we will be exploring how (the evolution of a **Cit+** mutant and **hypermutability**) with our variant calling workflow. The metadata file associated with this lesson can be [downloaded directly here](files/Ecoli_metadata_composite.csv) or [viewed in Github](https://github.com/datacarpentry/wrangling-genomics/main/episodes/files/Ecoli_metadata_composite.csv). If you would like to know details of how the file was created, you can look at [some notes and sources here](https://github.com/datacarpentry/wrangling-genomics/blob/main/episodes/files/Ecoli_metadata_composite_README.md).
 
 This metadata describes information on the *Ara-3* clones and the columns represent:
 
@@ -98,10 +100,24 @@ This metadata describes information on the *Ara-3* clones and the columns repres
 Based on the metadata, can you answer the following questions?
 
 1. How many different generations exist in the data?
-2. How many rows and how many columns are in this data?
-3. How many citrate+ mutants have been recorded in **Ara-3**?
-4. How many hypermutable mutants have been recorded in **Ara-3**?
+  There are 5 different generations in the data. 
 
+  cut -f2 -d',' Metadata\ File | sort | uniq -c | grep -v 'gen'
+
+2. How many rows and how many columns are in this data?
+  There are 63 rows of data and 12 columns.
+
+  head -n1 Metadata\ File | tr ',' '\n' | wc -l
+
+  wc -l Metadata\ File 
+
+3. How many citrate+ mutants have been recorded in **Ara-3**?
+  10 citrate+ mutants have been recorded Ara-3.
+
+cut -f12 -d ',' Metadata\ File | sort | uniq -c | grep -v 'cit'
+
+4. How many hypermutable mutants have been recorded in **Ara-3**?
+  6 hypermutable mutants have been recorded in Ara-3.
 
 
 ::::::::::::::::::::::::::::::::::::::: objectives
@@ -301,7 +317,7 @@ The adapter sequences came with the installation of trimmomatic, so we will firs
 ### NOTE: This next step will proably not work. Think about using the 'which' command and see if you can find out where these adaptors are
 
 ```bash
-$ cp ~/.miniconda3/pkgs/trimmomatic-0.38-0/share/trimmomatic-0.38-0/adapters/NexteraPE-PE.fa .
+$ cp ~/.miniconda3/pkgs/trimmomatic-0.39-0/share/trimmomatic-0.39-0/adapters/NexteraPE-PE.fa .
 ```
 
 We will also use a sliding window of size 4 that will remove bases if their
@@ -344,7 +360,13 @@ Use the output from your Trimmomatic command to answer the
 following questions.
 
 1) What percent of reads did we discard from our sample?
+
+0.23% of reads were discarded from the SRR2589044 sample.
+
 2) What percent of reads did we keep both pairs?
+
+79.96% of reads in which both the forward and reverse sequences
+were kept in the SRR2589044 sample.
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
