@@ -25,15 +25,20 @@ exercises: 15
 ### EXERCISE 1: NAVIGATION PRACTICE
 Navigate to your untrimmed_fastq directory in one command
 
+cd gen711-811/shell_data/untrimmed_fastq/
+
 ### EXERCISE 2: WILDCARDS
 What would the output look like if the wildcard could *not* be matched? Compare the outputs
 
-ls *fq
+If the wildcard could not be matched, the output would be ls: cannot access '*fq': no such file or directory.  However, 
+if the wildcard does match, a list of files or directories containing the subject indicated by the wildcard would be 
+displayed.
 
 ### EXERCISE 3: NAVIGATING PRACTICE
 Navigate to your home directory. From there, list the contents of the untrimmed_fastq directory.
 
-ls 
+cd ~
+ls gen711-811/shell_data/untrimmed_fastq/
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -66,20 +71,33 @@ what will `ls ../backup` display?
 ### EXERCISE 4: FINDING HIDDEN DIRECTORIES
 First navigate to the shell_data directory. There is a hidden directory within this directory. Explore the options for ls to find out how to see hidden directories. List the contents of the directory and identify the name of the text file in that directory.
 
+cd gen711-811/shell_data
+ls .hidden
+
 Hint: hidden files and folders in Unix start with ., for example .my_hidden_directory
 
 What is the hidden file name in the hidden directory?
 
-
+youfoundit.txt
 
 ### EXERCISE 5: HISTORY
 Find the line number in your history for the command that listed all the .sh files in /usr/bin. Rerun that command.
 
+history | grep '/usr/bin/.*\.sh'
+
 ### EXERCISE 6: FILE CONTENTS
 Print out the contents of the ~/shell_data/untrimmed_fastq/SRR097977.fastq file. What is the last line of the file?
+
+tail -n 1 gen711-811/shell_data/untrimmed_fastq/SRR097977.fastq 
+
+Last Line of File: C:CCC::CCCCCCCC<8?6A:C28C<608'&&&,'$
 
 ### EXERCISE 7: PATHS
 From your home directory, and without changing directories, use one short command to print the contents of all of the files in the ~/shell_data/untrimmed_fastq directory.
 
+cat gen711-811/shell_data/untrimmed_fastq/*
+
 ### EXERCISE 8: LESS (Sequence = TTTTTq)
 What are the next three nucleotides (characters) after the first instance of the sequence quoted above?
+
+The next three nucleotides after the first instance of the sequence quoted above 
