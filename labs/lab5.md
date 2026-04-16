@@ -34,13 +34,31 @@ Quality score:    01........11........21........31........41
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-*Warm ups: What is the last read in the SRR2584863_1.fastq file? How confident are you in this read?
+*Warm ups: What is the last read in the SRR2097977.fastq file? How confident are you in this read?
 A: 
+GGGTAGGTATTACTCAGGACGAGGCGGTCGTGCCAC
++SRR097977.249 209DTAAXX_Lenski2_1_7:8:3:441:292 length=36
+C:CCC::CCCCCCCC<8?6A:C28C<608'&&&,'$
+
+C = 34 (14) = 34 x 14 = 476
+: = 25 (4) = 25 x 4 = 100 
+< = 27 (2) = 2 x 27 = 54 
+8 = 23 (3) = 3 x 23 = 69
+? = 30 (1)          = 30 
+6 = 21 (2) = 2 x 21 = 42 
+A = 32 (1)          = 32 
+2 = 17 (1)          = 17 
+0 = 15 (1)          = 15 
+' = 6 (2)           = 12 
+& = 5 (3)           = 15 
+, = 11 (1)          = 11 
+$ = 3 (1)           = 3 
+36 x 41 = 1476
 
 How big are your fastqs? (Hint: Look at the options for the ls command to see how to show file sizes.)
 - hint, it involves 'ls'. See if you can do it using a relative and absolute path
 - another hint: There is an option to make it easy to read the file size. Use one of the two methods to find it
-A:
+A: SRR097977.fastq has a file size of 47 Kilobytes and SRR098026.fastq has a file size of 43 Kilobytes 
 
 
 
@@ -54,8 +72,10 @@ Paste the code you used to do each step between the \'\'\' below:
 
 
 ```
-rm -Rf backup
-
+rm -Rf backup/
+mkdir backup/
+cp SRR097977.fastq backup/SRR097977.fastq
+cp SRR098026.fastq backup/SRR098026.fastq
 ```
 
 ### File Permissions Help
@@ -76,24 +96,35 @@ talk more about this later).
 Change the permissions on all of your backup files to be write-protected.
 
 ```
+cd backup/
+ls -l -h
+chmod -w SRR097977.fastq 
+chmod -w SRR098026.fastq
+ls -l -h
 
-chmod ug+rwx SRR097977.fastq
 ```
 
 How do you know they are write protected?
-A:
+A: The write protections are removed as the 'w' from the permissions line is no longer present when the -l command is used in the backup file. 
 
 
 ### EXERCISE 5.3: CONDA ENVIRONMENTS AND PROGRAMS
 After loading a conda environment, where is the program 'fastqc' stored?
-
+The fastqc program is stored in the untrimmed_fastq directory. 
 ```
-Replace this with code
-
+conda activate genomics 
+fastqc *.fastq*
+mkdir fastqc_untrimmed_reads 
+unzip SRR097977_fastqc.zip 
+unzip SRR098026_fastqc.zip
+mv SRR097977_fastqc.zip fastqc_untrimmed_reads/
+mv SRR098026_fastqc.zip fastqc_untrimmed_reads/
 ```
 
 ### Explore the fastqc output. Which samples failed at least one of FastQC’s quality tests? What test(s) did those samples fail?
-
+Both samples failed at least one of the FastQC's quality test.  The SRR098026.fastq sample failed the per base sequence quality
+per sequence quality scores, per base seqeunce content, per sequence GC content, per base N content, and overrepresented sequence tests.
+The SRR97977.fastq sample failed the per base sequence quality, per base sequence quality content, and per sequence GC content tests.
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 - Use `which` for commands/programs to see where they are installed
@@ -102,5 +133,3 @@ Replace this with code
 - Explain what a conda environment is, and how to activate and deactivate it
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
-unzip
