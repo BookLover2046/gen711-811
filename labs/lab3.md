@@ -72,22 +72,26 @@ To change directories, use 'cd' and then hit tab two times to see directories in
 1. cd $HOME
 2. cd ~
 3. ../../../
-4.
+4. cd /home/users/hjm1079
 
 #### 2. How many programs in /bin 
 2. Do each of the following tasks from your current directory using a single ls command for each:
     - List all of the files in /bin that start with the letter ‘c’.
-    ls safdasfsla
+        ls /bin/c*
     - List all of the files in /bin that contain the letter ‘a’.
+        ls /bin/*a*
     - List all of the files in /bin that end with the letter ‘o’.
+        ls /bin/*o
+
     - Bonus: List all of the files in /bin that contain the letter ‘a’ or the letter ‘c’.
+        ls /bin/*[ac]*
 
 #### Answers here
 Start with the letter c ls /bin/c* 
-Start with the letter a ____
-Start with the letter o ____
-Contain the letter ‘a’ or the letter ‘c’ ____
+Start with the letter a ls /bin/*a*
+Start with the letter o ls /bin/*o
+Contain the letter ‘a’ or the letter ‘c’ ls /bin/*[ac]*
 
 #### What command/commands would you use to find the line number in your history for the command that listed all the '.fastq' files using the absolute path. Paste your answer below.
 
-ls gdsfgsd 
+history | grep '/.*\.fastq'
